@@ -1,0 +1,17 @@
+{
+    "name": "MPUIKit.Editor",
+    "references": [
+        "GUID:bf1286e5898e2444a8fec9d300fb3a6c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

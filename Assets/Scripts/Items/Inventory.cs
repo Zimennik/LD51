@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
     public void RemoveItemByName(string name)
     {
         CurrentItems.Remove(AllItems.FirstOrDefault(x => x.Name == name));
-        
+
         //remove the item from the inventory
         foreach (Transform child in _itemHoder)
         {
@@ -43,5 +43,10 @@ public class Inventory : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    public bool HasItem(ItemSO item)
+    {
+        return CurrentItems.Contains(item);
     }
 }

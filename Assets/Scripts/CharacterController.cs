@@ -4,13 +4,14 @@ using UnityEngine;
 
 //Player can move left and right.
 //Player can interact with objects and NPCs.
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour, IResetable
 {
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private SpriteRenderer _playerSprite;
     [SerializeField] public FlagController flagController;
+    [SerializeField] private Collider2D _playerCollider;
 
     public Inventory inventory;
     public bool IsCutscene = false;
@@ -76,6 +77,7 @@ public class CharacterController : MonoBehaviour
     public void StartCutscene()
     {
         IsCutscene = true;
+        _playerCollider.enabled = false;
         _currentInteractable = null;
         UIController.Instance.HideInteractionText();
     }
@@ -83,6 +85,7 @@ public class CharacterController : MonoBehaviour
     public void EndCutscene()
     {
         IsCutscene = false;
+        _playerCollider.enabled = true;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -91,11 +94,21 @@ public class CharacterController : MonoBehaviour
         {
             if (!other.TryGetComponent(out IInteractable interactable)) return;
             if (_currentInteractable == interactable) return;
-            _currentInteractable?.ExitInteractionZone();
 
             _currentInteractable = interactable;
-            _currentInteractable.EnterInteractionZone();
             UIController.Instance.ShowInteractionText(_currentInteractable.InteractionText);
+        }
+    }
+
+    public void RefreshInteractionText()
+    {
+        if (_currentInteractable != null)
+        {
+            UIController.Instance.ShowInteractionText(_currentInteractable.InteractionText);
+        }
+        else
+        {
+            UIController.Instance.HideInteractionText();
         }
     }
 
@@ -103,9 +116,27 @@ public class CharacterController : MonoBehaviour
     {
         if (!other.TryGetComponent(out IInteractable interactable)) return;
         if (_currentInteractable != interactable) return;
-        _currentInteractable?.ExitInteractionZone();
 
         _currentInteractable = null;
         UIController.Instance.HideInteractionText();
+    }
+
+    public void SitDown()
+    {
+        _playerAnimator.SetBool("IsSitting", true);
+    }
+
+    public void StandUp()
+    {
+        _playerAnimator.SetBool("IsSitting", false);
+    }
+
+    public void ResetObject()
+    {
+        _playerAnimator.SetBool("IsSitting", false);
+        _playerAnimator.SetBool("IsWalking", false);
+        _rigidbody2D.velocity = Vector2.zero;
+
+        transform.position = Vector3.zero;
     }
 }

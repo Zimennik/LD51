@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TakableItem : MonoBehaviour, IInteractable
+public class TakableItem : MonoBehaviour, IInteractable, IResetable
 {
     [SerializeField] private ItemSO item;
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private Collider2D _collder;
 
-    public void ResetItem()
-    {
-        ShowItem();
-    }
+    [SerializeField] private bool isVisible = true;
 
 
     public void ShowItem()
@@ -41,5 +38,17 @@ public class TakableItem : MonoBehaviour, IInteractable
 
     public void ExitInteractionZone()
     {
+    }
+
+    public void ResetObject()
+    {
+        if (isVisible)
+        {
+            ShowItem();
+        }
+        else
+        {
+            HideItem();
+        }
     }
 }

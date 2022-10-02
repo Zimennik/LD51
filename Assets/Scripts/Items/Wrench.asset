@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wrench
   Description: 
-  Image: {fileID: 21300000, guid: 87ea47f0196cd314f9c9335c09e294c1, type: 3}
+  Image: {fileID: 21300000, guid: 00585fdc6b962bc4baad1b82078d04b0, type: 3}

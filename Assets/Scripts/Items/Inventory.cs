@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IResetable
 {
     [SerializeField] private List<ItemSO> AllItems;
     [SerializeField] private RectTransform _itemHoder;
@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        CurrentItems.Clear();
     }
 
 
@@ -48,5 +50,15 @@ public class Inventory : MonoBehaviour
     public bool HasItem(ItemSO item)
     {
         return CurrentItems.Contains(item);
+    }
+
+    public bool HasItemByName(string name)
+    {
+        return CurrentItems.Any(x => x.Name == name);
+    }
+
+    public void ResetObject()
+    {
+        ResetInventory();
     }
 }

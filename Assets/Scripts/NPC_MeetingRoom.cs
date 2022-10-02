@@ -31,14 +31,8 @@ public class NPC_MeetingRoom : MonoBehaviour, IInteractable
 
         if (CharacterController.Instance.flagController.GetFlag("phone_repaired"))
         {
-            if (CharacterController.Instance.flagController.GetFlag("player_knows_about_invasion"))
-            {
-                UIController.Instance.DialogueSystem.ShowDialogue(dialogue3);
-                CharacterController.Instance.flagController.SetFlag("player_knows_NASA_number", true);
-                return;
-            }
-
-            UIController.Instance.DialogueSystem.ShowDialogue(dialogue2);
+            UIController.Instance.DialogueSystem.ShowDialogue(dialogue3);
+            CharacterController.Instance.flagController.SetFlag("player_knows_NASA_number", true);
             return;
         }
         else

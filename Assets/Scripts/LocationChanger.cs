@@ -16,7 +16,7 @@ public class LocationChanger : MonoBehaviour, IInteractable
             {
                 if (CharacterController.Instance.flagController.GetFlag(_requiredFlag))
                 {
-                    return "Open door";
+                    return "Open the door";
                 }
                 else
                 {
@@ -25,7 +25,7 @@ public class LocationChanger : MonoBehaviour, IInteractable
             }
 
             return (_requiredItem == null || CharacterController.Instance.inventory.HasItem(_requiredItem))
-                ? "Open door"
+                ? "Open the door"
                 : $"You need a {_requiredItem.Name}";
         }
     }

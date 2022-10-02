@@ -10,6 +10,9 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private TMP_Text _dialogueText;
     [SerializeField] private CanvasGroup _dialogueHolder;
 
+    [SerializeField] private AudioClip _talkSound;
+    [SerializeField] private AudioSource _audioSource;
+
     private bool _nextSentence = false;
 
     public void ShowDialogue(List<string> dialogue)
@@ -71,6 +74,7 @@ public class DialogueSystem : MonoBehaviour
                     }
 
                     _dialogueText.maxVisibleCharacters++;
+                    _audioSource.PlayOneShot(_talkSound);
                     yield return new WaitForSeconds(0.05f);
                 }
             }

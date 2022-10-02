@@ -22,7 +22,7 @@ public class NPC_Alien : MonoBehaviour, IInteractable
         dialogue2.Add("We are tirEd of your greed and sel-fishness");
         dialogue2.Add("we Are tired of yO-ur stupidity");
         dialogue2.Add("* You tell alien that this world is not perfect, but it is the best we have *");
-        dialogue2.Add("* Alien looks at you with a strange look *");
+        dialogue2.Add("* Alien looks at you. You don't know what to expect... *");
         dialogue2.Add("...");
         dialogue2.Add("We'll gi-ve you a lIttle more time to fix every_thing.");
         dialogue2.Add("SeE you in 100 y-ears");

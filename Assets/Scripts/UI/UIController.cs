@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -15,6 +17,10 @@ public class UIController : MonoBehaviour
     [SerializeField] public CanvasGroup _whiteFade;
     [SerializeField] private Image _fadeImage;
 
+    [SerializeField] private CanvasGroup _endingScreen;
+
+
+    private bool _isEnding = false;
 
     //Singleton
     public static UIController Instance { get; private set; }
@@ -29,6 +35,22 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if (_isEnding)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("MenuScene");
+            }
+        }
+    }
+
+    public void ShowEndingScreen()
+    {
+        _endingScreen.DOFade(1, 1).OnComplete(() => _isEnding = true);
     }
 
 
@@ -56,5 +78,4 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(time);
         _whiteFade.DOFade(0, time / 2);
     }
-
 }
